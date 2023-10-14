@@ -14,6 +14,8 @@ import javax.validation.Valid;
 /**
  * created by Anuradha Ranasinghe
  **/
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/app_user")
 public class UserController {
