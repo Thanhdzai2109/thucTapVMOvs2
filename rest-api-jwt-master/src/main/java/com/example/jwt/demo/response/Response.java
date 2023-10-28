@@ -4,12 +4,12 @@ package com.example.jwt.demo.response;
 import org.springframework.http.HttpStatus;
 
 
-public class FresherResponse {
+public class Response {
     private String Message;
     private HttpStatus status;
     private Object DATA;
 
-    public FresherResponse(String message, Object DATA, HttpStatus status) {
+    public Response(String message, Object DATA, HttpStatus status) {
         this.status = status;
         this.Message = message;
         this.DATA=DATA;
