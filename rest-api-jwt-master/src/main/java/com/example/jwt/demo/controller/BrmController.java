@@ -1,8 +1,8 @@
 package com.example.jwt.demo.controller;
 
-import com.example.jwt.demo.dto.BmiDto;
+import com.example.jwt.demo.dto.BrmDto;
 import com.example.jwt.demo.response.Response;
-import com.example.jwt.demo.service.BmiSerVice;
+import com.example.jwt.demo.service.BrmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/bmi")
-public class BmiController {
+@RequestMapping("/Brm")
+public class BrmController {
     @Autowired
-    private BmiSerVice serVice;
-
+    private BrmService service;
     @PostMapping("/ketQua")
-    ResponseEntity<Response> BmiSave(@RequestBody BmiDto dto) {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new Response(serVice.checkBmi(dto), dto, HttpStatus.OK));
+    ResponseEntity<Response> BrmSave(@RequestBody BrmDto dto) {
+        service.CaloOneDay(dto);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new Response("SUSSES", dto, HttpStatus.OK));
     }
 }
