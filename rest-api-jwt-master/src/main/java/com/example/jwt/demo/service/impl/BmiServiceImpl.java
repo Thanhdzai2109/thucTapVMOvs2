@@ -14,6 +14,7 @@ public class BmiServiceImpl implements BmiSerVice {
     @Override
     public String checkBmi(BmiDto dto) {
         dto.setKetQua(ketQua(dto));
+        System.out.println(ketQua(dto));
         repo.save(dto);
         if (dto.getOld() > 16) {
             if (ketQua(dto) < 18.5) {
@@ -34,7 +35,7 @@ public class BmiServiceImpl implements BmiSerVice {
 
     @Override
     public float ketQua(BmiDto dto) {
-        float ketQua = dto.getWeight() / (dto.getHeight()/100);
-        return ketQua;
+        float ketQua = dto.getWeight() / ((float) dto.getHeight()/100);
+        return  ketQua;
     }
 }
