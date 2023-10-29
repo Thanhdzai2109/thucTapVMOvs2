@@ -4,4 +4,5 @@ import com.example.jwt.demo.dto.BrmDto;
 
 public interface BrmService {
     float CaloOneDay(BrmDto dto);
+    float UocTinhCalo(BrmDto dto);
 }

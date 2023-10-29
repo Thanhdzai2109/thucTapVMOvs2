@@ -40,4 +40,20 @@ public class BrmServiceImpl implements BrmService {
 
         return TDEE;
     }
+
+    @Override
+    public float UocTinhCalo(BrmDto dto) {
+        float calo;
+        if (dto.getSex() == 1) {
+            calo = ((float) 9.99 * dto.getWeight()) + ((float) 6.25 * ((float) dto.getHeight() / 100)) - ((float) 4.92 * dto.getOld()) + 5;
+
+        } else {
+            calo = ((float) 9.99 * dto.getWeight()) + ((float) 6.25 * ((float) dto.getHeight() / 100)) - ((float) 4.92 * dto.getOld()) - 161;
+        }
+        dto.setKetQua(calo);
+        repo.save(dto);
+        return calo;
+    }
+
+
 }

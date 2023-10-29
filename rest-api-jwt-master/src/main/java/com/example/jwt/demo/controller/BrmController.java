@@ -14,9 +14,17 @@ import org.springframework.web.bind.annotation.*;
 public class BrmController {
     @Autowired
     private BrmService service;
+
     @PostMapping("/ketQua")
     ResponseEntity<Response> BrmSave(@RequestBody BrmDto dto) {
         service.CaloOneDay(dto);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(new Response("SUSSES", dto, HttpStatus.OK));
     }
+
+    @PostMapping("/uocTinhCalo")
+    ResponseEntity<Response> UocTinhCalo(@RequestBody BrmDto dto) {
+        service.UocTinhCalo(dto);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new Response("SUSSES", dto, HttpStatus.OK));
+    }
+    
 }
