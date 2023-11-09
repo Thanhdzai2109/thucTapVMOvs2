@@ -13,7 +13,7 @@ public class ChatController {
     private ChatService chatService;
 
     @GetMapping("/request")
-    public String getResponse(@RequestParam String userMessage) {
+    public String getResponse(@RequestBody String userMessage) {
         return chatService.getChatResponse(userMessage);
     }
 }
