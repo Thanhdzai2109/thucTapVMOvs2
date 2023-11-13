@@ -74,6 +74,11 @@
             <version>1.0</version>
             <systemPath>${basedir}\src\lib\Ab.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
