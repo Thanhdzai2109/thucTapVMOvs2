@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+	<!-- insert your AIML categories here -->
+	<category>
+	    <pattern>Tôi muốn tính chỉ số BMI</pattern>
+	    <template>Tôi cần một số thông tin để tính chỉ số <set name = "topic">BMI</set> của bạn</template>
+    </category>
+    
+    <topic name = "BMI">
+      <category>
+         <pattern> * </pattern>
+         <template>Chiều cao của bạn là bao nhiêu cm.</template>
+      </category>
+      
+   </topic>
+</aiml>
