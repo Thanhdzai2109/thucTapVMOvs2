@@ -5,8 +5,9 @@ import org.alicebot.ab.Chat;
 import org.alicebot.ab.History;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.alicebot.ab.*;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 @Service
 public class ChatServiceImpl implements ChatService {
@@ -21,18 +22,21 @@ public class ChatServiceImpl implements ChatService {
     public String getChatResponse(String message) {
         String response = chatSession.multisentenceRespond(message);
         // response = " BMI: height:168 age:22 ... "
-        if (message.matches("\\d+")) {
-            String[] parts = message.split(" ");
-            String part1 = parts[0];  // Phần đầu tiên
-            String part2 = parts[1];
-            int cc = Integer.parseInt(part1);
-            int canNang =Integer.parseInt(part2);
-            float ketQua = (float) cc /((float) canNang /100);
-            System.out.println();
-            History<String> history = chatSession.inputHistory;
-            return chatSession.multisentenceRespond(message);
-        }
-        return chatSession.multisentenceRespond(message);
+        History<String> history = chatSession.inputHistory;
+        String userHeight = extractValueFromSetTag(response, "user_height");
+        System.out.println("User Height: " + userHeight);
+        return response;
+    }
 
+    private String extractValueFromSetTag(String response , String setName) {
+        String regex = "<set\\s+name\\s*=\\s*\"" + setName + "\"\\s*>\\s*<star index=\"2\"/></set>";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(response);
+
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else {
+            return null;
+        }
     }
 }
