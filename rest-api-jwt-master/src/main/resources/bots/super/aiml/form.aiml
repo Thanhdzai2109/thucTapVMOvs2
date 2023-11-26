@@ -2,75 +2,52 @@
 <aiml version="2.0">
 	<!-- insert your AIML categories here -->
 	<category>
-	    <pattern>Tính chỉ số BMI form</pattern>
+	    <pattern>Tính chỉ số BMI</pattern>
 	    <template>
-            <condition var="response_code">
-                <li value="200"><get var="content"/></li>
-                <li>ERROR</li>
-            </condition>
-	        <card>
-	            <title>Tính chỉ số BMI</title>
-	            <button>
-	                <text>Xác nhận</text>
-	                <postback></postback>
-                </button>
-            </card>
+	        <srai>BMI info</srai>
 	    </template>
     </category>
-    
+
     <category>
-	    <pattern>Tính lượng kalo tiêu thụ form</pattern>
+	    <pattern>Tính lượng kalo tiêu thụ</pattern>
 	    <template>
-	        <card>
-	            <title>Tính lượng kalo tiêu thụ</title>
-	            
-	            <button>
-	                <text>Xác nhận</text>
-	                <postback></postback>
-                </button>
-            </card>
+	        <srai>Kalo info</srai>
 	    </template>
     </category>
-    
+
     <category>
-	    <pattern>Tư vấn tăng cân form</pattern>
+	    <pattern>Tư vấn tăng cân</pattern>
 	    <template>
-	        <card>
-	            <title>Tư vấn tăng cân</title>
-	            
-	            <button>
-	                <text>Xác nhận</text>
-	                <postback></postback>
-                </button>
-            </card>
+	        <srai>Tăng cân info</srai>
 	    </template>
     </category>
-    
+
     <category>
-	    <pattern>Chế độ ăn theo thể trạng 3-5 tuổi form</pattern>
+	    <pattern>Chế độ ăn theo thể trạng ^</pattern>
 	    <template>
-	        <card>
-	            <title>Chế độ ăn theo thể trạng 3-5 tuổi</title>
-	            
-	            <button>
-	                <text>Xác nhận</text>
-	                <postback></postback>
-                </button>
-            </card>
+	        <srai>Thể trạng info</srai>
 	    </template>
     </category>
-    
+
     <category>
-	    <pattern>Chế độ ăn theo hiện tượng 3-5 tuổi form</pattern>
+	    <pattern>Chế độ ăn theo hiện tượng ^</pattern>
 	    <template>
-	        <card>
-	            <title>Chế độ ăn theo hiện tượng 3-5 tuổi</title>
-	            
-	            <button>
-	                <text>Xác nhận</text>
-	                <postback></postback>
-                </button>
-            </card>
+	        <srai>Hiện tượng info</srai>
 	    </template>
+    </category>
+
+    <!--Hỏi thông tin theo kịch bản-->
+    <category>
+        <pattern>BMI info</pattern>
+        <template>
+            Hãy cho tôi biết thông tin chiều cao, cân nặng, độ tuổi, giới tính của bạn
+        </template>
+    </category>
+
+    <category>
+        <pattern>Kalo info</pattern>
+        <template>
+            Hãy cho tôi biết thông tin chiều cao, cân nặng, độ tuổi, giới tính, mức độ vận động của bạn
+        </template>
     </category>
 </aiml>

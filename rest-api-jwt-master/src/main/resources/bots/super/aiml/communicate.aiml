@@ -7,12 +7,6 @@
   <template>Tôi là một chương trình trí tuệ nhân tạo không có tên. Bạn có thể gọi tôi là Super.</template>
 </category>
 
-<!-- Câu hỏi chung -->
-<category>
-  <pattern>*</pattern>
-  <template>Tôi không rõ bạn đang nói về điều gì. Bạn có thể giải thích thêm không?</template>
-</category>
-
 <category>
     <pattern>Tôi tên là *</pattern>
     <template>Chào <set name = "username"><star index="1"></star></set> , rất vui được gặp bạn</template>
@@ -24,7 +18,7 @@
 </category>
 
 <category>
-    <pattern>_ chào _</pattern>
+    <pattern>^ chào ^</pattern>
     <template>
         <random>
             <li>Chào bạn</li>
@@ -34,30 +28,24 @@
     </template>
 </category>
 
-
 <category>
     <pattern>help</pattern>
     <template>
         Tôi có thể làm gì?
         <button>
             <text>Tính chỉ số BMI</text>
-            <postback>Tính chỉ số BMI form</postback>
         </button>
         <button>
             <text>Tính lượng kalo tiêu thụ</text>
-            <postback>Tính lượng kalo tiêu thụ form</postback>
         </button>
         <button>
             <text>Tư vấn tăng cân</text>
-            <postback>Tư vấn tăng cân form</postback>
         </button>
         <button>
             <text>Chế độ ăn theo thể trạng 3-5 tuổi</text>
-            <postback>Chế độ ăn theo thể trạng 3-5 tuổi form</postback>
         </button>
         <button>
             <text>Chế độ ăn theo hiện tượng 3-5 tuổi</text>
-            <postback>Chế độ ăn theo hiện tượng 3-5 tuổi form</postback>
         </button>
     </template>
 </category>
