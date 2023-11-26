@@ -1,5 +1,7 @@
-0,TÍNH CHỈ SỐ BMI FORM,*,*,<condition var="response_code">#Newline                <li value="200"><get var="content"/></li>#Newline                <li>ERROR</li>#Newline            </condition>#Newline	        <card>#Newline	            <title>Tính chỉ số BMI</title>#Newline	            <button>#Newline	                <text>Xác nhận</text>#Newline	                <postback/>#Newline                </button>#Newline            </card>,form.aiml
-0,TÍNH LƯỢNG KALO TIÊU THỤ FORM,*,*,<card>#Newline	            <title>Tính lượng kalo tiêu thụ</title>#Newline	            #Newline	            <button>#Newline	                <text>Xác nhận</text>#Newline	                <postback/>#Newline                </button>#Newline            </card>,form.aiml
-0,TƯ VẤN TĂNG CÂN FORM,*,*,<card>#Newline	            <title>Tư vấn tăng cân</title>#Newline	            #Newline	            <button>#Newline	                <text>Xác nhận</text>#Newline	                <postback/>#Newline                </button>#Newline            </card>,form.aiml
-0,CHẾ ĐỘ ĂN THEO THỂ TRẠNG 3-5 TUỔI FORM,*,*,<card>#Newline	            <title>Chế độ ăn theo thể trạng 3-5 tuổi</title>#Newline	            #Newline	            <button>#Newline	                <text>Xác nhận</text>#Newline	                <postback/>#Newline                </button>#Newline            </card>,form.aiml
-0,CHẾ ĐỘ ĂN THEO HIỆN TƯỢNG 3-5 TUỔI FORM,*,*,<card>#Newline	            <title>Chế độ ăn theo hiện tượng 3-5 tuổi</title>#Newline	            #Newline	            <button>#Newline	                <text>Xác nhận</text>#Newline	                <postback/>#Newline                </button>#Newline            </card>,form.aiml
+0,TÍNH CHỈ SỐ BMI,*,*,<srai>BMI info</srai>,form.aiml
+0,TÍNH LƯỢNG KALO TIÊU THỤ,*,*,<srai>Kalo info</srai>,form.aiml
+0,TƯ VẤN TĂNG CÂN,*,*,<srai>Tăng cân info</srai>,form.aiml
+0,CHẾ ĐỘ ĂN THEO THỂ TRẠNG ^,*,*,<srai>Thể trạng info</srai>,form.aiml
+0,CHẾ ĐỘ ĂN THEO HIỆN TƯỢNG ^,*,*,<srai>Hiện tượng info</srai>,form.aiml
+0,BMI INFO,*,*,Hãy cho tôi biết thông tin chiều cao#Comma cân nặng#Comma độ tuổi#Comma giới tính của bạn,form.aiml
+0,KALO INFO,*,*,Hãy cho tôi biết thông tin chiều cao#Comma cân nặng#Comma độ tuổi#Comma giới tính#Comma mức độ vận động của bạn,form.aiml
