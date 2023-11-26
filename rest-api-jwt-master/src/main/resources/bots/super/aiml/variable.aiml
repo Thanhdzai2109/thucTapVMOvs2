@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+	<!-- insert your AIML categories here -->
+<category>
+  <pattern>Chiều cao ^ là *</pattern>
+  <template>
+    Đã lưu lại chiều cao của bạn: <set name="user_height"><star index="2"/></set>cm.
+  </template>
+</category>
+
+<category>
+  <pattern>Cân nặng ^ là *</pattern>
+  <template>
+    Đã lưu lại cân nặng của bạn: <set name="user_weight"><star index="2"/></set>kg.
+  </template>
+</category>
+
+<category>
+  <pattern>^ tuổi ^ là *</pattern>
+  <template>
+    Đã lưu lại độ tuổi của bạn: <set name="user_age"><star index="3"/></set>.
+  </template>
+</category>
+
+<category>
+  <pattern>Giới tính ^ là *</pattern>
+  <template>
+    Đã lưu lại giới tính của bạn: <set name="user_age"><star index="2"/></set>.
+  </template>
+</category>
+</aiml>

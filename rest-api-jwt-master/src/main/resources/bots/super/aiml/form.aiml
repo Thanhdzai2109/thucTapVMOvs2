@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+	<!-- insert your AIML categories here -->
+	<category>
+	    <pattern>Tính chỉ số BMI form</pattern>
+	    <template>
+            <condition var="response_code">
+                <li value="200"><get var="content"/></li>
+                <li>ERROR</li>
+            </condition>
+	        <card>
+	            <title>Tính chỉ số BMI</title>
+	            <button>
+	                <text>Xác nhận</text>
+	                <postback></postback>
+                </button>
+            </card>
+	    </template>
+    </category>
+    
+    <category>
+	    <pattern>Tính lượng kalo tiêu thụ form</pattern>
+	    <template>
+	        <card>
+	            <title>Tính lượng kalo tiêu thụ</title>
+	            
+	            <button>
+	                <text>Xác nhận</text>
+	                <postback></postback>
+                </button>
+            </card>
+	    </template>
+    </category>
+    
+    <category>
+	    <pattern>Tư vấn tăng cân form</pattern>
+	    <template>
+	        <card>
+	            <title>Tư vấn tăng cân</title>
+	            
+	            <button>
+	                <text>Xác nhận</text>
+	                <postback></postback>
+                </button>
+            </card>
+	    </template>
+    </category>
+    
+    <category>
+	    <pattern>Chế độ ăn theo thể trạng 3-5 tuổi form</pattern>
+	    <template>
+	        <card>
+	            <title>Chế độ ăn theo thể trạng 3-5 tuổi</title>
+	            
+	            <button>
+	                <text>Xác nhận</text>
+	                <postback></postback>
+                </button>
+            </card>
+	    </template>
+    </category>
+    
+    <category>
+	    <pattern>Chế độ ăn theo hiện tượng 3-5 tuổi form</pattern>
+	    <template>
+	        <card>
+	            <title>Chế độ ăn theo hiện tượng 3-5 tuổi</title>
+	            
+	            <button>
+	                <text>Xác nhận</text>
+	                <postback></postback>
+                </button>
+            </card>
+	    </template>
+    </category>
+</aiml>

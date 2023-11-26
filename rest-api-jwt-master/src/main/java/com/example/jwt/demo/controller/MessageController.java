@@ -15,13 +15,13 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @PostMapping("/kichBan1")
+    @PostMapping("/physical-menu")
     public ResponseEntity<ThucDon> kichBan1(@RequestBody Tre tre) {
 
         return ResponseEntity.ok(messageService.thucDonTheoTheTrang(tre));
     }
 
-    @PostMapping("/kichBan2")
+    @PostMapping("/phenomenal-menu")
     public ResponseEntity<ThucDon> kichBan2(@RequestParam String hienTuong) {
         ThucDon thucDon = new ThucDon();
         thucDon.setMessage(messageService.thucDonTheoHienTuong(hienTuong));
