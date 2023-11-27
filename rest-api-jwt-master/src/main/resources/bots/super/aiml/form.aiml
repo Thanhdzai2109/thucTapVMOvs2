@@ -4,6 +4,7 @@
 	<category>
 	    <pattern>Tính chỉ số BMI</pattern>
 	    <template>
+	        <think><set name = "topic">BMI</set></think>
 	        <srai>BMI info</srai>
 	    </template>
     </category>
@@ -11,6 +12,7 @@
     <category>
 	    <pattern>Tính lượng kalo tiêu thụ</pattern>
 	    <template>
+            <think> <set name = "topic">Kalo</set></think>
 	        <srai>Kalo info</srai>
 	    </template>
     </category>
@@ -18,6 +20,7 @@
     <category>
 	    <pattern>Tư vấn tăng cân</pattern>
 	    <template>
+	        <think> <set name = "topic">weightgain</set></think>
 	        <srai>Tăng cân info</srai>
 	    </template>
     </category>
@@ -25,29 +28,153 @@
     <category>
 	    <pattern>Chế độ ăn theo thể trạng ^</pattern>
 	    <template>
-	        <srai>Thể trạng info</srai>
+            <think> <set name = "topic">bodymenu</set></think>
+	        <srai>bodymenu info</srai>
 	    </template>
     </category>
 
     <category>
 	    <pattern>Chế độ ăn theo hiện tượng ^</pattern>
 	    <template>
-	        <srai>Hiện tượng info</srai>
+            <think> <set name = "topic">thetrangmenu</set></think>
+	        <srai>thetrangmenu info</srai>
 	    </template>
     </category>
 
     <!--Hỏi thông tin theo kịch bản-->
-    <category>
-        <pattern>BMI info</pattern>
-        <template>
-            Hãy cho tôi biết thông tin chiều cao, cân nặng, độ tuổi, giới tính của bạn
-        </template>
-    </category>
+    <topic name="BMI">
+        <category>
+            <pattern>BMI info</pattern>
+            <template>
+                Hãy cho tôi biết thông tin
+                <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>
+                <condition name = "user_weight" value = "unknown"> cân nặng(kg), </condition>
+                <condition name = "user_age" value = "unknown"> độ tuổi, </condition>
+                <condition name = "user_gender" value = "unknown"> giới tính(nam/nữ) </condition>
+                của bạn
+            </template>
+        </category>
+        <category>
+            <pattern>*</pattern>
+            <template>
+                Tôi cần thêm thông tin về
+                <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>
+                <condition name = "user_weight" value = "unknown"> cân nặng(kg), </condition>
+                <condition name = "user_age" value = "unknown"> độ tuổi, </condition>
+                <condition name = "user_gender" value = "unknown"> giới tính(nam/nữ) </condition>
+                của bạn
+            </template>
+        </category>
 
-    <category>
-        <pattern>Kalo info</pattern>
-        <template>
-            Hãy cho tôi biết thông tin chiều cao, cân nặng, độ tuổi, giới tính, mức độ vận động của bạn
-        </template>
-    </category>
+    </topic>
+
+    <topic name = "kalo">
+        <category>
+            <pattern>Kalo info</pattern>
+            <template>
+                Hãy cho tôi biết thông tin
+                <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>
+                <condition name = "user_weight" value = "unknown"> cân nặng(kg), </condition>
+                <condition name = "user_age" value = "unknown"> độ tuổi, </condition>
+                <condition name = "user_gender" value = "unknown"> giới tính(nam/nữ), </condition>
+                <condition name = "activity_level" value = "unknown"> mức độ vận động </condition>
+                của bạn
+            </template>
+        </category>
+        <category>
+            <pattern>*</pattern>
+            <template>
+                Tôi cần thêm thông tin về
+                <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>
+                <condition name = "user_weight" value = "unknown"> cân nặng(kg), </condition>
+                <condition name = "user_age" value = "unknown"> độ tuổi, </condition>
+                <condition name = "user_gender" value = "unknown"> giới tính(nam/nữ), </condition>
+                <condition name = "activity_level" value = "unknown"> mức độ vận động </condition>
+                của bạn
+            </template>
+        </category>
+    </topic>
+
+    <topic name = "weightgain">
+        <category>
+            <pattern>Tăng cân info</pattern>
+            <template>
+                Hãy cho tôi biết thông tin
+                <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>
+                <condition name = "user_weight" value = "unknown"> cân nặng(kg), </condition>
+                <condition name = "user_age" value = "unknown"> độ tuổi, </condition>
+                <condition name = "user_gender" value = "unknown"> giới tính(nam/nữ), </condition>
+                <condition name = "activity_level" value = "unknown"> mức độ vận động, </condition>
+                <condition name = "weight_target" value = "unknown"> trọng lượng mục tiêu, </condition>
+                <condition name = "weight_gain" value = "unknown"> tốc độ tăng cân </condition>
+                của bạn
+            </template>
+        </category>
+        <category>
+            <pattern>*</pattern>
+            <template>
+                Tôi cần thêm thông tin về
+                <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>
+                <condition name = "user_weight" value = "unknown"> cân nặng(kg), </condition>
+                <condition name = "user_age" value = "unknown"> độ tuổi, </condition>
+                <condition name = "user_gender" value = "unknown"> giới tính(nam/nữ), </condition>
+                <condition name = "activity_level" value = "unknown"> mức độ vận động, </condition>
+                <condition name = "weight_target" value = "unknown"> trọng lượng mục tiêu, </condition>
+                <condition name = "weight_gain" value = "unknown"> tốc độ tăng cân </condition>
+                của bạn
+            </template>
+        </category>
+    </topic>
+
+    <topic name="bodymenu">
+        <category>
+            <pattern>bodymenu info</pattern>
+            <template>
+                Hãy cho tôi biết thông tin
+                <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>
+                <condition name = "user_weight" value = "unknown"> cân nặng(kg), </condition>
+                <condition name = "user_age" value = "unknown"> độ tuổi, </condition>
+                <condition name = "user_gender" value = "unknown"> giới tính(nam/nữ) </condition>
+                của bạn
+            </template>
+        </category>
+        <category>
+            <pattern>*</pattern>
+            <template>
+                Tôi cần thêm thông tin về
+                <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>
+                <condition name = "user_weight" value = "unknown"> cân nặng(kg), </condition>
+                <condition name = "user_age" value = "unknown"> độ tuổi, </condition>
+                <condition name = "user_gender" value = "unknown"> giới tính(nam/nữ) </condition>
+                của bạn
+            </template>
+        </category>
+
+    </topic>
+
+    <topic name="thetrangmenu">
+        <category>
+            <pattern>thetrangmenu info</pattern>
+            <template>
+                Hãy cho tôi biết thông tin
+                <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>
+                <condition name = "user_weight" value = "unknown"> cân nặng(kg), </condition>
+                <condition name = "user_age" value = "unknown"> độ tuổi, </condition>
+                <condition name = "user_gender" value = "unknown"> giới tính(nam/nữ) </condition>
+                của bạn
+            </template>
+        </category>
+        <category>
+            <pattern>*</pattern>
+            <template>
+                Tôi cần thêm thông tin về
+                <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>
+                <condition name = "user_weight" value = "unknown"> cân nặng(kg), </condition>
+                <condition name = "user_age" value = "unknown"> độ tuổi, </condition>
+                <condition name = "user_gender" value = "unknown"> giới tính(nam/nữ) </condition>
+                của bạn
+            </template>
+        </category>
+
+    </topic>
 </aiml>

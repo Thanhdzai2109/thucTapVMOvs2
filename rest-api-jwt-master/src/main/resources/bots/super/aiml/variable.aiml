@@ -1,31 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aiml version="2.0">
 	<!-- insert your AIML categories here -->
+
+<!--height-->
 <category>
   <pattern>Chiều cao ^ là *</pattern>
   <template>
     Đã lưu lại chiều cao của bạn: <set name="user_height"><star index="2"/></set>cm.
   </template>
 </category>
+<category>
+  <pattern>Cao *</pattern>
+  <template>
+    Đã lưu lại chiều cao của bạn: <set name="user_height"><star index="1"/></set>cm.
+  </template>
+</category>
+<category>
+  <pattern>*cm</pattern>
+  <template>
+    Đã lưu lại chiều cao của bạn: <set name="user_height"><star index="1"/></set>cm.
+  </template>
+</category>
+<!--height-->
 
+<!--weight-->
 <category>
   <pattern>Cân nặng ^ là *</pattern>
   <template>
     Đã lưu lại cân nặng của bạn: <set name="user_weight"><star index="2"/></set>kg.
   </template>
 </category>
+<category>
+  <pattern>Nặng *</pattern>
+  <template>
+    Đã lưu lại cân nặng của bạn: <set name="user_weight"><star index="1"/></set>kg.
+  </template>
+</category>
+<category>
+  <pattern>cân nặng *</pattern>
+  <template>
+    Đã lưu lại cân nặng của bạn: <set name="user_weight"><star index="1"/></set>kg.
+  </template>
+</category>
+<category>
+  <pattern>*kg</pattern>
+  <template>
+    Đã lưu lại cân nặng của bạn: <set name="user_weight"><star index="1"/></set>kg.
+  </template>
+</category>
+<!--weight-->
 
+<!--age-->
 <category>
   <pattern>^ tuổi ^ là *</pattern>
   <template>
     Đã lưu lại độ tuổi của bạn: <set name="user_age"><star index="3"/></set>.
   </template>
 </category>
+<category>
+  <pattern>Tuổi *</pattern>
+  <template>
+    Đã lưu lại độ tuổi của bạn: <set name="user_age"><star index="1"/></set>.
+  </template>
+</category>
+<category>
+  <pattern>* tuổi</pattern>
+  <template>
+    Đã lưu lại độ tuổi của bạn: <set name="user_age"><star index="1"/></set>.
+  </template>
+</category>
+<!--age-->
 
+<!--gender-->
 <category>
   <pattern>Giới tính ^ là *</pattern>
   <template>
     Đã lưu lại giới tính của bạn: <set name="user_gender"><star index="2"/></set>.
   </template>
 </category>
+<category>
+  <pattern>Giới tính *</pattern>
+  <template>
+    Đã lưu lại giới tính của bạn: <set name="user_gender"><star index="1"/></set>.
+  </template>
+</category>
+<category>
+  <pattern>nam</pattern>
+  <template>
+    Đã lưu lại giới tính của bạn: <set name="user_gender">nam</set>.
+  </template>
+</category>
+<category>
+  <pattern>nữ</pattern>
+  <template>
+    Đã lưu lại giới tính của bạn: <set name="user_gender">nữ</set>.
+  </template>
+</category>
+<!--gender-->
+
+<!--activity level-->
+<category>
+    <pattern>Mức độ vận động ^ là *</pattern>
+    <template>
+        Đã lưu lại mức độ vận động của bạn: <set name="activity_level"><star index="2"/></set>.
+    </template>
+</category>
+<category>
+    <pattern>Mức độ vận động *</pattern>
+    <template>
+        Đã lưu lại mức độ vận động của bạn: <set name="activity_level"><star index="1"/></set>.
+    </template>
+</category>
+<!--activity level-->
+
+<!--weight-->
+<category>
+    <pattern>Trọng lượng mục tiêu ^ là *</pattern>
+    <template>
+        Đã lưu lại trọng lượng mục tiêu của bạn: <set name="weight_target"><star index="2"/></set>.
+    </template>
+</category>
+<category>
+    <pattern>Trọng lượng mục tiêu *</pattern>
+    <template>
+        Đã lưu lại trọng lượng mục tiêu của bạn: <set name="weight_target"><star index="1"/></set>.
+    </template>
+</category>
+
+<category>
+    <pattern>Tốc độ tăng cân ^ là *</pattern>
+    <template>
+        Đã lưu lại Tốc độ tăng cân mục tiêu của bạn: <set name="weight_gain"><star index="2"/></set>.
+    </template>
+</category>
+<category>
+    <pattern>Tốc độ tăng cân *</pattern>
+    <template>
+        Đã lưu lại Tốc độ tăng cân mục tiêu của bạn: <set name="weight_gain"><star index="1"/></set>.
+    </template>
+</category>
+<!--weight-->
+
 </aiml>
