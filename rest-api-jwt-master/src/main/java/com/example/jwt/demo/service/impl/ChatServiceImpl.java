@@ -31,68 +31,69 @@ public class ChatServiceImpl implements ChatService {
     public String getChatResponse(String message) {
         String response = chatSession.multisentenceRespond(message);
         String topic = chatSession.predicates.get("topic");
-        int height = Integer.parseInt(chatSession.predicates.get("user_height"));
-        int weight = Integer.parseInt(chatSession.predicates.get("user_weight"));
-        int old = Integer.parseInt(chatSession.predicates.get("user_age"));
-        int month = Integer.parseInt(chatSession.predicates.get("month"));
-        int gender = 0;
-        if (chatSession.predicates.get("user_gender").toLowerCase() == null) {
-            response = "Cho tôi biết giưới tính của bạn";
-        } else {
-            if (chatSession.predicates.get("user_gender").toLowerCase().equals("nam")) {
-                gender = 1;
-            } else {
-                gender = 0;
-            }
-        }
+        if (topic == null) {
 
-        switch (topic) {
-            case "BMI-cal":
-                if (height == 0) {
-                    response = "Vui lòng cho tôi biết chiều cao của bạn";
-                } else if (weight == 0) {
-                    response = "Vui lòng cho tôi biết cân nặng của bạn";
+            int height = Integer.parseInt(chatSession.predicates.get("user_height"));
+            int weight = Integer.parseInt(chatSession.predicates.get("user_weight"));
+            int old = Integer.parseInt(chatSession.predicates.get("user_age"));
+            int month = Integer.parseInt(chatSession.predicates.get("month"));
+            int gender = 0;
+            if (chatSession.predicates.get("user_gender").toLowerCase() == null) {
+                response = "Cho tôi biết giưới tính của bạn";
+            } else {
+                if (chatSession.predicates.get("user_gender").toLowerCase().equals("nam")) {
+                    gender = 1;
                 } else {
-                    response = BMi(height, weight);
+                    gender = 0;
                 }
-                break;
-            case "BRM-cal":
-                if (height == 0) {
-                    response = "Vui lòng cho tôi biết chiều cao của bạn";
-                } else if (weight == 0) {
-                    response = "Vui lòng cho tôi biết cân nặng của bạn";
-                } else if (old == 0) {
-                    response = "Vui lòng cho tôi biết tuổi của Bạn";
-                } else {
-                    response = "Bạn nên ăn " + BRM(weight, height, old, gender) + "một ngày";
-                }
-                break;
-            case "Hien-tuong":
-                String[] hienTuongList = new String[0];
-                if (hienTuongList == null || hienTuongList.length == 0) {
-                    response = "Vui lòng cho biết hiện tượng";
-                } else {
-                    response = hientuongService.giaiPhap(hienTuongList);
-                }
-                break;
-            case "kich-ban1":
-                if (height == 0) {
-                    response = "Vui lòng cho tôi biết chiều cao của trẻ";
-                } else if (weight == 0) {
-                    response = "Vui lòng cho tôi biết cân nặng của trẻ";
-                } else if (month == 0) {
-                    response = "Vui lòng cho tôi biết tuổi của trẻ";
-                }
-                else if(chatSession.predicates.get("user_gender").toLowerCase() == null){
-                    response = "Vui lòng cho tôi biết giới tính của trẻ";
-                }
-                else {
-                   response = thucDonTheoTheTrang( chatSession.predicates.get("user_gender"),  month,  height, weight).toString();
-                }
-                break;
-            case "kich-ban2":
-                response = thucDonTheoHienTuong(message);
-                break;
+            }
+
+            switch (topic) {
+                case "BMI-cal":
+                    if (height == 0) {
+                        response = "Vui lòng cho tôi biết chiều cao của bạn";
+                    } else if (weight == 0) {
+                        response = "Vui lòng cho tôi biết cân nặng của bạn";
+                    } else {
+                        response = BMi(height, weight);
+                    }
+                    break;
+                case "BRM-cal":
+                    if (height == 0) {
+                        response = "Vui lòng cho tôi biết chiều cao của bạn";
+                    } else if (weight == 0) {
+                        response = "Vui lòng cho tôi biết cân nặng của bạn";
+                    } else if (old == 0) {
+                        response = "Vui lòng cho tôi biết tuổi của Bạn";
+                    } else {
+                        response = "Bạn nên ăn " + BRM(weight, height, old, gender) + "một ngày";
+                    }
+                    break;
+                case "Hien-tuong":
+                    String[] hienTuongList = new String[0];
+                    if (hienTuongList == null || hienTuongList.length == 0) {
+                        response = "Vui lòng cho biết hiện tượng";
+                    } else {
+                        response = hientuongService.giaiPhap(hienTuongList);
+                    }
+                    break;
+                case "kich-ban1":
+                    if (height == 0) {
+                        response = "Vui lòng cho tôi biết chiều cao của trẻ";
+                    } else if (weight == 0) {
+                        response = "Vui lòng cho tôi biết cân nặng của trẻ";
+                    } else if (month == 0) {
+                        response = "Vui lòng cho tôi biết tuổi của trẻ";
+                    } else if (chatSession.predicates.get("user_gender").toLowerCase() == null) {
+                        response = "Vui lòng cho tôi biết giới tính của trẻ";
+                    } else {
+                        response = thucDonTheoTheTrang(chatSession.predicates.get("user_gender"), month, height, weight).toString();
+                    }
+                    break;
+                case "kich-ban2":
+                    response = thucDonTheoHienTuong(message);
+                    break;
+            }
         }
         return response;
     }
