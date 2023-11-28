@@ -29,6 +29,10 @@
 	    <pattern>Chế độ ăn theo thể trạng ^</pattern>
 	    <template>
             <think> <set name = "topic">bodymenu</set></think>
+            <reset name="user_height"/>
+            <reset name="user_weight"/>
+            <reset name="user_gender"/>
+            <reset name="user_age"/>
 	        <srai>bodymenu info</srai>
 	    </template>
     </category>
@@ -36,8 +40,8 @@
     <category>
 	    <pattern>Chế độ ăn theo hiện tượng ^</pattern>
 	    <template>
-            <think> <set name = "topic">thetrangmenu</set></think>
-	        <srai>thetrangmenu info</srai>
+            <think> <set name = "topic">hientuongmenu</set></think>
+	        <srai>hientuongmenu info</srai>
 	    </template>
     </category>
 
@@ -152,9 +156,9 @@
 
     </topic>
 
-    <topic name="thetrangmenu">
+    <topic name="hientuongmenu">
         <category>
-            <pattern>thetrangmenu info</pattern>
+            <pattern>hientuongmenu info</pattern>
             <template>
                 Hãy cho tôi biết thông tin
                 <condition name = "user_height" value = "unknown"> chiều cao(cm), </condition>

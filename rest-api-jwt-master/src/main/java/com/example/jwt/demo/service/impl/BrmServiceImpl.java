@@ -55,5 +55,23 @@ public class BrmServiceImpl implements BrmService {
         return calo;
     }
 
+    @Override
+    public int mapActivityLevel(String value) {
+        if(value.isEmpty() || value.equals("unknown")) return 0;
+        if(value.contains("1") && value.contains("2")){
+            return 1;
+        }
+
+        if(value.contains("2") && value.contains("3")){
+            return 2;
+        }
+
+        if(value.contains("1")) return 1;
+
+        if(value.contains("2")) return 2;
+
+        return 3;
+    }
+
 
 }

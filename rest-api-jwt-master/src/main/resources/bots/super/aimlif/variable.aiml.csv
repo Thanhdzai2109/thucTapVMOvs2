@@ -1,5 +1,6 @@
 0,CHIỀU CAO ^ LÀ *,*,*,Đã lưu lại chiều cao của bạn: <set name="user_height"><star index="2"/></set>cm.,variable.aiml
 0,CAO *,*,*,Đã lưu lại chiều cao của bạn: <set name="user_height"><star index="1"/></set>cm.,variable.aiml
+0,CHIỀU CAO *,*,*,Đã lưu lại chiều cao của bạn: <set name="user_height"><star index="1"/></set>cm.,variable.aiml
 0,*CM,*,*,Đã lưu lại chiều cao của bạn: <set name="user_height"><star index="1"/></set>cm.,variable.aiml
 0,CÂN NẶNG ^ LÀ *,*,*,Đã lưu lại cân nặng của bạn: <set name="user_weight"><star index="2"/></set>kg.,variable.aiml
 0,NẶNG *,*,*,Đã lưu lại cân nặng của bạn: <set name="user_weight"><star index="1"/></set>kg.,variable.aiml
@@ -18,3 +19,5 @@
 0,TRỌNG LƯỢNG MỤC TIÊU *,*,*,Đã lưu lại trọng lượng mục tiêu của bạn: <set name="weight_target"><star index="1"/></set>.,variable.aiml
 0,TỐC ĐỘ TĂNG CÂN ^ LÀ *,*,*,Đã lưu lại Tốc độ tăng cân mục tiêu của bạn: <set name="weight_gain"><star index="2"/></set>.,variable.aiml
 0,TỐC ĐỘ TĂNG CÂN *,*,*,Đã lưu lại Tốc độ tăng cân mục tiêu của bạn: <set name="weight_gain"><star index="1"/></set>.,variable.aiml
+0,HIỆN TƯỢNG ^ LÀ *,*,*,Đã lưu lại Tốc độ tăng cân mục tiêu của bạn: <set name="hien_tuong"><star index="2"/></set>.,variable.aiml
+0,HIỆN TƯỢNG *,*,*,Đã lưu lại Tốc độ tăng cân mục tiêu của bạn: <set name="hien_tuong"><star index="1"/></set>.,variable.aiml

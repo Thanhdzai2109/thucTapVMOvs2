@@ -1,11 +1,16 @@
 package com.example.jwt.demo.service.impl;
 
 import com.example.jwt.demo.constant.GioiTinhConst;
+import com.example.jwt.demo.dto.BmiDto;
+import com.example.jwt.demo.dto.BrmDto;
 import com.example.jwt.demo.dto.ThucDon;
 import com.example.jwt.demo.dto.Tre;
+import com.example.jwt.demo.model.HienTuong;
 import com.example.jwt.demo.model.enums.GioiTinhEnum;
+import com.example.jwt.demo.service.BmiSerVice;
 import com.example.jwt.demo.service.ChatService;
 import com.example.jwt.demo.service.PhenomenonService;
+import com.example.jwt.demo.utils.Util;
 import org.alicebot.ab.Chat;
 import org.alicebot.ab.History;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class ChatServiceImpl implements ChatService {
@@ -27,19 +34,27 @@ public class ChatServiceImpl implements ChatService {
     @Autowired
     private PhenomenonService hientuongService;
 
+    @Autowired
+    private BrmServiceImpl brmService;
+
+    @Autowired
+    BmiSerVice bmiSerVice;
+
     @Override
     public String getChatResponse(String message) {
         String response = chatSession.multisentenceRespond(message);
         String topic = chatSession.predicates.get("topic");
-        if (topic == null) {
+        if (!Objects.equals(topic, "unknown")) {
 
-            int height = Integer.parseInt(chatSession.predicates.get("user_height"));
-            int weight = Integer.parseInt(chatSession.predicates.get("user_weight"));
-            int old = Integer.parseInt(chatSession.predicates.get("user_age"));
-            int month = Integer.parseInt(chatSession.predicates.get("month"));
+            int height = Util.tryParseInt(chatSession.predicates.get("user_height"));
+            int weight = Util.tryParseInt(chatSession.predicates.get("user_weight"));
+            int old = Util.tryParseInt(chatSession.predicates.get("user_age"));
+            int month = Util.tryParseInt(chatSession.predicates.get("user_age"));
+            int activityLevel = brmService.mapActivityLevel(chatSession.predicates.get("activity_level"));
+            String hienTuong = chatSession.predicates.get("hien_tuong");
             int gender = 0;
-            if (chatSession.predicates.get("user_gender").toLowerCase() == null) {
-                response = "Cho tôi biết giưới tính của bạn";
+            if (chatSession.predicates.get("user_gender").toLowerCase() == "unknown") {
+                response = "Cho tôi biết giới tính của bạn";
             } else {
                 if (chatSession.predicates.get("user_gender").toLowerCase().equals("nam")) {
                     gender = 1;
@@ -49,16 +64,26 @@ public class ChatServiceImpl implements ChatService {
             }
 
             switch (topic) {
-                case "BMI-cal":
+                case "BMI":
                     if (height == 0) {
                         response = "Vui lòng cho tôi biết chiều cao của bạn";
-                    } else if (weight == 0) {
+                    }
+                    else if (weight == 0) {
                         response = "Vui lòng cho tôi biết cân nặng của bạn";
-                    } else {
-                        response = BMi(height, weight);
+                    }
+                    else if (old == 0) {
+                        response = "Vui lòng cho tôi biết tuổi của bạn";
+                    }
+                    else {
+                        BmiDto dto = new BmiDto();
+                        dto.setHeight(height);
+                        dto.setWeight(weight);
+                        dto.setSex(gender);
+                        dto.setOld(old);
+                        response = "Chỉ số BMI của bạn là: " + bmiSerVice.ketQua(dto) + " (" + bmiSerVice.checkBmi(dto)+")";
                     }
                     break;
-                case "BRM-cal":
+                case "Kalo":
                     if (height == 0) {
                         response = "Vui lòng cho tôi biết chiều cao của bạn";
                     } else if (weight == 0) {
@@ -66,47 +91,61 @@ public class ChatServiceImpl implements ChatService {
                     } else if (old == 0) {
                         response = "Vui lòng cho tôi biết tuổi của Bạn";
                     } else {
-                        response = "Bạn nên ăn " + BRM(weight, height, old, gender) + "một ngày";
+                        BrmDto dto = new BrmDto();
+                        dto.setHeight(height);
+                        dto.setWeight(weight);
+                        dto.setSex(gender);
+                        dto.setOld(old);
+                        response = "Bạn nên ăn " + brmService.UocTinhCalo(dto) + " một ngày";
                     }
                     break;
-                case "Hien-tuong":
-                    String[] hienTuongList = new String[0];
-                    if (hienTuongList == null || hienTuongList.length == 0) {
-                        response = "Vui lòng cho biết hiện tượng";
-                    } else {
-                        response = hientuongService.giaiPhap(hienTuongList);
+                case "weightgain":
+                    if (height == 0) {
+                        response = "Vui lòng cho tôi biết chiều cao của bạn";
+                    } else if (weight == 0) {
+                        response = "Vui lòng cho tôi biết cân nặng của bạn";
+                    }
+                    else if (old == 0) {
+                        response = "Vui lòng cho tôi biết tuổi của Bạn";
+                    }
+                    else if (activityLevel == 0) {
+                        response = "Vui lòng cho tôi biết mức độ vận động của bạn mấy lần trên tuần";
+                    }
+                    else {
+                        BrmDto dto = new BrmDto();
+                        dto.setHeight(height);
+                        dto.setWeight(weight);
+                        dto.setSex(gender);
+                        dto.setOld(old);
+                        dto.setActivityLevel(activityLevel);
+                        response = "Bạn nên ăn " + brmService.CaloOneDay(dto) + " một ngày để có thể tăng cân";
                     }
                     break;
-                case "kich-ban1":
+                case "bodymenu":
                     if (height == 0) {
                         response = "Vui lòng cho tôi biết chiều cao của trẻ";
                     } else if (weight == 0) {
                         response = "Vui lòng cho tôi biết cân nặng của trẻ";
                     } else if (month == 0) {
-                        response = "Vui lòng cho tôi biết tuổi của trẻ";
-                    } else if (chatSession.predicates.get("user_gender").toLowerCase() == null) {
-                        response = "Vui lòng cho tôi biết giới tính của trẻ";
+                        response = "Vui lòng cho tôi biết tuổi của trẻ (Tháng tuổi)";
                     } else {
-                        response = thucDonTheoTheTrang(chatSession.predicates.get("user_gender"), month, height, weight).toString();
+                        response = thucDonTheoTheTrang(chatSession.predicates.get("user_gender"), month, height, weight).getMessage();
                     }
                     break;
-                case "kich-ban2":
-                    response = thucDonTheoHienTuong(message);
+                case "hientuongmenu":
+                    if(hienTuong.equals("unknown")) {
+                        List<HienTuong> list = hientuongService.getHienTuongs();
+                        response = "Hãy chọn biểu hiện của trẻ: \n";
+                        response += list.stream().map(item -> item.getBieuHien()).collect(Collectors.joining(";"));
+                    }else {
+                        response = thucDonTheoHienTuong(message);
+                    }
+                    break;
+                default:
                     break;
             }
         }
         return response;
-    }
-
-    private String BMi(int canNang, int chieuCao) {
-        int bmi = canNang / (chieuCao / 100);
-        if (bmi < 19) {
-            return "Bạn hơi gầy";
-        } else if (bmi > 25) {
-            return "Bạn hơi nặng cân";
-        } else {
-            return "Bạn có một thân hình đẹp";
-        }
     }
 
     private ThucDon thucDonTheoTheTrang(String sex, int month, int height, int weight) {

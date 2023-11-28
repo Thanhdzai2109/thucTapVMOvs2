@@ -16,6 +16,12 @@
   </template>
 </category>
 <category>
+  <pattern>Chiều cao *</pattern>
+  <template>
+    Đã lưu lại chiều cao của bạn: <set name="user_height"><star index="1"/></set>cm.
+  </template>
+</category>
+<category>
   <pattern>*cm</pattern>
   <template>
     Đã lưu lại chiều cao của bạn: <set name="user_height"><star index="1"/></set>cm.
@@ -65,6 +71,18 @@
 </category>
 <category>
   <pattern>* tuổi</pattern>
+  <template>
+    Đã lưu lại độ tuổi của bạn: <set name="user_age"><star index="1"/></set>.
+  </template>
+</category>
+<category>
+  <pattern>* tháng tuổi</pattern>
+  <template>
+    Đã lưu lại độ tuổi của bạn: <set name="user_age"><star index="1"/></set>.
+  </template>
+</category>
+<category>
+  <pattern>* tháng</pattern>
   <template>
     Đã lưu lại độ tuổi của bạn: <set name="user_age"><star index="1"/></set>.
   </template>
@@ -140,5 +158,32 @@
     </template>
 </category>
 <!--weight-->
+
+<!--hien tuong-->
+<category>
+    <pattern>Hiện tượng ^ là *</pattern>
+    <template>
+        Đã lưu: <set name="hien_tuong"><star index="2"/></set>.
+    </template>
+</category>
+<category>
+    <pattern>Hiện tượng *</pattern>
+    <template>
+        Đã lưu: <set name="hien_tuong"><star index="1"/></set>.
+    </template>
+</category>
+<category>
+    <pattern>Biểu hiện ^ là *</pattern>
+    <template>
+        Đã lưu: <set name="hien_tuong"><star index="2"/></set>.
+    </template>
+</category>
+<category>
+    <pattern>Biểu hiện *</pattern>
+    <template>
+        Đã lưu: <set name="hien_tuong"><star index="1"/></set>.
+    </template>
+</category>
+<!--hien tuong-->
 
 </aiml>

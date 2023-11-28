@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aiml version="2.0">
 
+<category>
+    <pattern>*</pattern>
+    <template>Tôi không hiểu bạn vui lòng chat help</template>
+</category>
 <!-- Hỏi tên -->
 <category>
   <pattern>TÊN GÌ</pattern>
@@ -28,24 +32,30 @@
     </template>
 </category>
 
+
 <category>
     <pattern>help</pattern>
     <template>
-        Tôi có thể làm gì?
-        <button>
+        <think><set name="topic">unknown</set></think>
+        <button >
             <text>Tính chỉ số BMI</text>
+            <postback>Tính chỉ số BMI</postback>
         </button>
         <button>
             <text>Tính lượng kalo tiêu thụ</text>
+            <postback>Tính lượng kalo tiêu thụ</postback>
         </button>
         <button>
             <text>Tư vấn tăng cân</text>
+            <postback>Tư vấn tăng cân</postback>
         </button>
         <button>
             <text>Chế độ ăn theo thể trạng 3-5 tuổi</text>
+            <postback>Chế độ ăn theo thể trạng 3-5 tuổi</postback>
         </button>
         <button>
             <text>Chế độ ăn theo hiện tượng 3-5 tuổi</text>
+            <postback>Chế độ ăn theo hiện tượng 3-5 tuổi</postback>
         </button>
     </template>
 </category>
