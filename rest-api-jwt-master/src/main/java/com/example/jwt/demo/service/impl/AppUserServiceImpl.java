@@ -2,6 +2,7 @@ package com.example.jwt.demo.service.impl;
 
 import com.example.jwt.demo.configuration.ApiParameters;
 import com.example.jwt.demo.dto.AppUserDTO;
+import com.example.jwt.demo.dto.UserEditDTO;
 import com.example.jwt.demo.exception.CustomException;
 import com.example.jwt.demo.jwt.JwtGenerator;
 import com.example.jwt.demo.model.AppUser;
@@ -50,13 +51,15 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public ResponseEntity<?> updateUser(AppUserDTO appUserDTO) {
+    public ResponseEntity<?> updateUser(UserEditDTO appUser) {
         try {
-            Optional<AppUser> optional = userRepository.findById(appUserDTO.getUser_id());
-            if (optional.isPresent()) {
-                AppUser appUser = dTOToEntity(appUserDTO);
-                appUser.setUser_id(optional.get().getUser_id());
-                if (userRepository.save(appUser) != null) {
+            AppUser optional = userRepository.findById(appUser.getUser_id()).get();
+            if (optional != null) {
+                optional.setHeight(appUser.getHeight());
+                optional.setWeight(appUser.getWeight());
+                optional.setAge(appUser.getAge());
+                optional.setGender(appUser.getGender());
+                if (userRepository.save(optional) != null) {
                     return new ResponseEntity<>("App user updated successfully", HttpStatus.OK);
                 } else {
                     return new ResponseEntity<>("App user update failed", HttpStatus.BAD_REQUEST);
@@ -91,6 +94,10 @@ public class AppUserServiceImpl implements AppUserService {
             Optional<AppUser> optional = userRepository.findById(user_id);
             if (optional.isPresent()) {
                 AppUserDTO appUserDTO = entityToDTO(optional.get());
+                appUserDTO.setHeight(optional.get().getHeight());
+                appUserDTO.setWeight(optional.get().getWeight());
+                appUserDTO.setGender(optional.get().getGender());
+                appUserDTO.setAge(optional.get().getAge());
                 return new ResponseEntity<>(appUserDTO, HttpStatus.OK);
             } else {
 
@@ -137,7 +144,7 @@ public class AppUserServiceImpl implements AppUserService {
     private String createJwtWithoutPrefix(AppUser appUser) {
         List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + appUser.getUser_role()));
-        String accessToken = JwtGenerator.generateAccessJWT(appUser.getUser_name(), appUser.getUser_email(), grantedAuthorities, ApiParameters.JWT_EXPIRATION, ApiParameters.JWT_SECRET);
+        String accessToken = JwtGenerator.generateAccessJWT(appUser.getUser_name(), appUser.getUser_id(), grantedAuthorities, ApiParameters.JWT_EXPIRATION, ApiParameters.JWT_SECRET);
         return accessToken;
     }
 
@@ -162,6 +169,7 @@ public class AppUserServiceImpl implements AppUserService {
 
     private AppUserDTO entityToDTO(AppUser appUser) {
         AppUserDTO appUserDTO = new AppUserDTO();
+        appUserDTO.setUser_id(appUser.getUser_id());
         appUserDTO.setUser_name(appUser.getUser_name());
         appUserDTO.setUser_email(appUser.getUser_email());
         appUserDTO.setUser_role(appUser.getUser_role());

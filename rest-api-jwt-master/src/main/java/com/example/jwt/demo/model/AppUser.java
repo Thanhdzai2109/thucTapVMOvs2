@@ -1,13 +1,18 @@
 package com.example.jwt.demo.model;
 
+import com.example.jwt.demo.model.enums.GioiTinhEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "app_user")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Getter
+@Setter
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +27,14 @@ public class AppUser {
     private String user_role = "Admin";
     @JsonIgnore
     private String refresh_token;
+
+    private int height;
+
+    private int weight;
+
+    private int gender;
+
+    private int age;
 
     public AppUser() {
     }

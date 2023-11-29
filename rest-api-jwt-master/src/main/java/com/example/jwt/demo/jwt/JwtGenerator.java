@@ -14,13 +14,13 @@ import java.util.stream.Collectors;
 @Component
 public class JwtGenerator {
 
-    public static String generateAccessJWT(String subject, String uuid, Collection<? extends GrantedAuthority> authorities, int expiration, String secret) {
+    public static String generateAccessJWT(String subject, int uuid, Collection<? extends GrantedAuthority> authorities, int expiration, String secret) {
         Instant now = Instant.now();
         return Jwts.builder().setSubject(subject)
                 .claim("authorities", authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .setIssuedAt(Date.from(now))
                 .setExpiration(Date.from(now.plusSeconds(expiration)))
-                .signWith(SignatureAlgorithm.HS256, secret.getBytes()).claim("ud", uuid)
+                .signWith(SignatureAlgorithm.HS256, secret.getBytes()).claim("uid", uuid)
                 .claim("type", "ACCESS").compact();
     }
 

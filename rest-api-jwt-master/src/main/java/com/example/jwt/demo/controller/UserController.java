@@ -1,6 +1,7 @@
 package com.example.jwt.demo.controller;
 
 import com.example.jwt.demo.dto.AppUserDTO;
+import com.example.jwt.demo.dto.UserEditDTO;
 import com.example.jwt.demo.exception.CustomException;
 import com.example.jwt.demo.exception.CustomValidateException;
 import com.example.jwt.demo.model.AuthToken;
@@ -40,7 +41,7 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateUser(@Valid @RequestBody AppUserDTO cmsUserDTO, BindingResult bindingResult) {
+    public ResponseEntity<?> updateUser(@Valid @RequestBody UserEditDTO cmsUserDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             validateError = customValidateException.validationException(bindingResult);
             throw new CustomException(validateError);

@@ -1,6 +1,8 @@
 package com.example.jwt.demo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -10,6 +12,8 @@ import javax.validation.constraints.Size;
 /**
  * created by Anuradha Ranasinghe
  */
+@Getter
+@Setter
 public class AppUserDTO {
     private int user_id;
     @NotNull
@@ -25,6 +29,14 @@ public class AppUserDTO {
     private String user_role;
     @JsonIgnore
     private String refresh_token;
+
+    private int height;
+
+    private int weight;
+
+    private int gender;
+
+    private int age;
 
     public AppUserDTO() {
     }

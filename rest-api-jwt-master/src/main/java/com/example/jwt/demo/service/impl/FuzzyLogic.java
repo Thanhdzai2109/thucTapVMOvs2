@@ -7,7 +7,9 @@ import com.example.jwt.demo.repository.ChieuCaoCanNangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FuzzyLogic {
@@ -30,7 +32,7 @@ public class FuzzyLogic {
 
     public ChieuCaoCanNang tinhToanChieuCaoCanNang(String gioiTinh, double thang) {
         List<ChieuCaoCanNang> datas = chieuCaoCanNangRepository.findAll();
-
+        datas =datas.stream().sorted(Comparator.comparing(ChieuCaoCanNang::getTuoi)).collect(Collectors.toList());
         ChieuCaoCanNang smin = null, smax = null;
         for (int i = 0; i < datas.size() - 2; i++) {
             ChieuCaoCanNang chieuCaoCanNang = datas.get(i);
