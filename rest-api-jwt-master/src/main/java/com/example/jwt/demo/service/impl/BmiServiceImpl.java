@@ -34,7 +34,8 @@ public class BmiServiceImpl implements BmiSerVice {
 
     @Override
     public float ketQua(BmiDto dto) {
-        float ketQua = dto.getWeight() / ((float) dto.getHeight()/100);
+        float heightM = ((float) dto.getHeight() /100);
+        float ketQua = (float) (dto.getWeight() / (Math.pow(heightM, 2)));
         return  ketQua;
     }
 }
