@@ -9,15 +9,15 @@ import javax.persistence.Transient;
 import java.util.List;
 
 @Entity
-@Table(name = "hien_tuong")
+@Table(name = "phenomena")
 @Getter
 @Setter
-public class HienTuong extends BaseEntity {
-    private String vanDe;
-    private String bieuHien;
-    private int mucDoPhuHop;
+public class Phenomena extends BaseEntity {
+    private String problem;
+    private String symptoms;
+    private int relevance;
 
     @Transient
-    private List<GiaiPhap> cacGiaiPhap;
+    private List<Solutions> solutions;
 
 }

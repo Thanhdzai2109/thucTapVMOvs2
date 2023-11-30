@@ -1,8 +1,8 @@
 package com.example.jwt.demo.service.impl;
 
 import com.example.jwt.demo.dto.ThucDon;
-import com.example.jwt.demo.model.GiaiPhap;
-import com.example.jwt.demo.model.HienTuong;
+import com.example.jwt.demo.model.Solutions;
+import com.example.jwt.demo.model.Phenomena;
 import com.example.jwt.demo.repository.GiaiPhapRepository;
 import com.example.jwt.demo.repository.HienTuongRepository;
 import com.example.jwt.demo.service.PhenomenonService;
@@ -23,14 +23,14 @@ public class PhenomenonServiceImpl implements PhenomenonService {
     @Autowired
     private GiaiPhapRepository giaiPhapRepository;
 
-    public List<HienTuong> getHienTuongs() {
+    public List<Phenomena> getHienTuongs() {
         return hienTuongRepository.findAll();
     }
 
     public String giaiPhap(String[] hienTuongs) {
-        List<HienTuong> hienTuongList = new ArrayList<>();
+        List<Phenomena> hienTuongList = new ArrayList<>();
         for (String hienTuong : hienTuongs) {
-            hienTuongList.addAll(hienTuongRepository.findByHienTuong(hienTuong.trim()));
+            hienTuongList.addAll(hienTuongRepository.findBySymptoms(hienTuong.trim()));
         }
 
         Map<String, Integer> map = new HashMap<>();
@@ -38,15 +38,15 @@ public class PhenomenonServiceImpl implements PhenomenonService {
         String vanDe = "";
 
         // Tìm vấn đề có độ phù hợp cao nhất
-        for (HienTuong hienTuong : hienTuongList) {
+        for (Phenomena hienTuong : hienTuongList) {
 
-            map.putIfAbsent(hienTuong.getVanDe(), 0);
+            map.putIfAbsent(hienTuong.getProblem(), 0);
 
-            Integer mucDoPhuHop = map.get(hienTuong.getVanDe());
-            map.put(hienTuong.getVanDe(), mucDoPhuHop + hienTuong.getMucDoPhuHop());
-            if (map.get(hienTuong.getVanDe()) > doPhuHopMax) {
-                doPhuHopMax = map.get(hienTuong.getVanDe());
-                vanDe = hienTuong.getVanDe();
+            Integer mucDoPhuHop = map.get(hienTuong.getProblem());
+            map.put(hienTuong.getProblem(), mucDoPhuHop + hienTuong.getRelevance());
+            if (map.get(hienTuong.getProblem()) > doPhuHopMax) {
+                doPhuHopMax = map.get(hienTuong.getProblem());
+                vanDe = hienTuong.getProblem();
             }
         }
 
@@ -55,9 +55,9 @@ public class PhenomenonServiceImpl implements PhenomenonService {
 
         StringBuilder result = new StringBuilder("Từ hiện tượng, có thể trẻ đang gặp vấn đề ");
         result.append(vanDe.toLowerCase()).append(", giải pháp cho vấn đề này là");
-        List<GiaiPhap> giaiPhapList = giaiPhapRepository.findByVanDe(vanDe);
-        for (GiaiPhap giaiPhap : giaiPhapList) {
-            result.append("\n- ").append(giaiPhap.getGiaiPhap());
+        List<Solutions> solutionList = giaiPhapRepository.findByProblem(vanDe);
+        for (Solutions solution : solutionList) {
+            result.append("\n- ").append(solution.getSolution());
         }
         ThucDon thucDon = new ThucDon();
         thucDon.setMessage(result.toString());

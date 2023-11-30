@@ -1,6 +1,6 @@
 package com.example.jwt.demo.controller;
 
-import com.example.jwt.demo.model.HienTuong;
+import com.example.jwt.demo.model.Phenomena;
 import com.example.jwt.demo.service.impl.PhenomenonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +19,7 @@ public class PhenomenonController {
     private PhenomenonServiceImpl hienTuongService;
 
     @GetMapping
-    public List<HienTuong> getHienTuongs() {
+    public List<Phenomena> getHienTuongs() {
         return hienTuongService.getHienTuongs();
     }
 }

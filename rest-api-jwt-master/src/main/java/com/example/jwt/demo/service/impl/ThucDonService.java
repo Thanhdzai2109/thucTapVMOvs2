@@ -1,8 +1,8 @@
 package com.example.jwt.demo.service.impl;
 
 import com.example.jwt.demo.dto.ThucDon;
-import com.example.jwt.demo.model.ThucPhamChuyenDoi;
-import com.example.jwt.demo.model.TileDinhDuong;
+import com.example.jwt.demo.model.FoodKalo;
+import com.example.jwt.demo.model.NutritionalRatio;
 import com.example.jwt.demo.repository.NhuCauNangLuongRepository;
 import com.example.jwt.demo.repository.ThucPhamChuyenDoiRepository;
 import com.example.jwt.demo.repository.TiLeDinhDuongRepository;
@@ -33,7 +33,7 @@ public class ThucDonService {
         String theTrang = fuzzyLogic.xacDinhTheTrang(sex, month, weight, height);
 
 //        Lấy ra nhu cầu năng lượng theo độ tuổi từ DB đơn vị kcal
-        double kcal = nhuCauNangLuongRepository.findByThang(month).getNangLuong();
+        double kcal = nhuCauNangLuongRepository.findByAge(month).getKalo();
         switch (theTrang) {
             case "Suy dinh dưỡng cấp 2":
                 kcal = kcal * 1.2;
@@ -50,37 +50,37 @@ public class ThucDonService {
         }
 
 
-        TileDinhDuong tileDinhDuong = tiLeDinhDuongRepository.findByTuoi(month);
-        double tinhBot = kcal * (tileDinhDuong.getTinhBot() / 100);
-        double chatBeo = kcal * (tileDinhDuong.getChatBeo() / 100);
+        NutritionalRatio tileDinhDuong = tiLeDinhDuongRepository.findByAge(month);
+        double tinhBot = kcal * (tileDinhDuong.getStarch() / 100);
+        double chatBeo = kcal * (tileDinhDuong.getFat() / 100);
         double protein = kcal * (tileDinhDuong.getProtein() / 100);
 
         Random Rand = new Random(); // random thuc pham
         StringBuilder tb = new StringBuilder(); // random tinh bot
-        List<ThucPhamChuyenDoi> listTb = thucPhamChuyenDoiRepository.findByNhom("Nhiều tinh bột");
+        List<FoodKalo> listTb = thucPhamChuyenDoiRepository.findByGroup("Nhiều tinh bột");
 
         for (int i = 1; i <= 3; i++) {
             int index = Rand.nextInt(listTb.size());
-            ThucPhamChuyenDoi thucPhamChuyenDoi = listTb.remove(index);
+            FoodKalo thucPhamChuyenDoi = listTb.remove(index);
             tb.append(thucPhamChuyenDoi.getThucPham());
             tb.append(',');
         }
 
         StringBuilder cb = new StringBuilder(); // random chat beo
-        List<ThucPhamChuyenDoi> listCb = thucPhamChuyenDoiRepository.findByNhom("Nhiều chất béo");
+        List<FoodKalo> listCb = thucPhamChuyenDoiRepository.findByGroup("Nhiều chất béo");
 
         for (int i = 1; i <= 3; i++) {
             int index = Rand.nextInt(listCb.size());
-            ThucPhamChuyenDoi thucPhamChuyenDoi = listCb.remove(index);
+            FoodKalo thucPhamChuyenDoi = listCb.remove(index);
             cb.append(thucPhamChuyenDoi.getThucPham());
             cb.append(',');
         }
 
         StringBuilder pr = new StringBuilder(); // random protein
-        List<ThucPhamChuyenDoi> listPr = thucPhamChuyenDoiRepository.findByNhom("Nhiều protein");
+        List<FoodKalo> listPr = thucPhamChuyenDoiRepository.findByGroup("Nhiều protein");
         for (int i = 1; i <= 3; i++) {
             int index = Rand.nextInt(listPr.size());
-            ThucPhamChuyenDoi thucPhamChuyenDoi = listPr.remove(index);
+            FoodKalo thucPhamChuyenDoi = listPr.remove(index);
             pr.append(thucPhamChuyenDoi.getThucPham());
             pr.append(',');
         }

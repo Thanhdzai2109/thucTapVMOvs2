@@ -1,11 +1,11 @@
 package com.example.jwt.demo.repository;
 
-import com.example.jwt.demo.model.GiaiPhap;
+import com.example.jwt.demo.model.Solutions;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface GiaiPhapRepository extends JpaRepository<GiaiPhap, Long> {
+public interface GiaiPhapRepository extends JpaRepository<Solutions, Long> {
 
-    List<GiaiPhap> findByVanDe(String vanDe);
+    List<Solutions> findByProblem(String vanDe);
 }

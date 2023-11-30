@@ -7,10 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "giai_phap")
+@Table(name = "solutions")
 @Getter
 @Setter
-public class GiaiPhap extends BaseEntity {
-    private String giaiPhap;
-    private String vanDe;
+public class Solutions extends BaseEntity {
+    private String solution;
+    private String problem;
 }

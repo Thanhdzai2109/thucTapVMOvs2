@@ -39,23 +39,18 @@
         <think><set name="topic">unknown</set></think>
         <button >
             <text>Tính chỉ số BMI</text>
-            <postback>Tính chỉ số BMI</postback>
         </button>
         <button>
             <text>Tính lượng kalo tiêu thụ</text>
-            <postback>Tính lượng kalo tiêu thụ</postback>
         </button>
         <button>
             <text>Tư vấn tăng cân</text>
-            <postback>Tư vấn tăng cân</postback>
         </button>
         <button>
             <text>Chế độ ăn theo thể trạng 3-5 tuổi</text>
-            <postback>Chế độ ăn theo thể trạng 3-5 tuổi</postback>
         </button>
         <button>
             <text>Chế độ ăn theo hiện tượng 3-5 tuổi</text>
-            <postback>Chế độ ăn theo hiện tượng 3-5 tuổi</postback>
         </button>
     </template>
 </category>

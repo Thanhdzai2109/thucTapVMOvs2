@@ -4,19 +4,16 @@ import com.example.jwt.demo.constant.GioiTinhConst;
 import com.example.jwt.demo.dto.BmiDto;
 import com.example.jwt.demo.dto.BrmDto;
 import com.example.jwt.demo.dto.ThucDon;
-import com.example.jwt.demo.dto.Tre;
-import com.example.jwt.demo.model.HienTuong;
+import com.example.jwt.demo.model.Phenomena;
 import com.example.jwt.demo.model.enums.GioiTinhEnum;
 import com.example.jwt.demo.service.BmiSerVice;
 import com.example.jwt.demo.service.ChatService;
 import com.example.jwt.demo.service.PhenomenonService;
 import com.example.jwt.demo.utils.Util;
 import org.alicebot.ab.Chat;
-import org.alicebot.ab.History;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -66,10 +63,10 @@ public class ChatServiceImpl implements ChatService {
             switch (topic) {
                 case "BMI":
                     if (height == 0) {
-                        response = "Vui lòng cho tôi biết chiều cao của bạn";
+                        response = "Vui lòng cho tôi biết chiều cao của bạn (cm)";
                     }
                     else if (weight == 0) {
-                        response = "Vui lòng cho tôi biết cân nặng của bạn";
+                        response = "Vui lòng cho tôi biết cân nặng của bạn (kg)";
                     }
                     else if (old == 0) {
                         response = "Vui lòng cho tôi biết tuổi của bạn";
@@ -85,9 +82,9 @@ public class ChatServiceImpl implements ChatService {
                     break;
                 case "Kalo":
                     if (height == 0) {
-                        response = "Vui lòng cho tôi biết chiều cao của bạn";
+                        response = "Vui lòng cho tôi biết chiều cao của bạn (cm)";
                     } else if (weight == 0) {
-                        response = "Vui lòng cho tôi biết cân nặng của bạn";
+                        response = "Vui lòng cho tôi biết cân nặng của bạn (kg)";
                     } else if (old == 0) {
                         response = "Vui lòng cho tôi biết tuổi của Bạn";
                     } else {
@@ -101,9 +98,9 @@ public class ChatServiceImpl implements ChatService {
                     break;
                 case "weightgain":
                     if (height == 0) {
-                        response = "Vui lòng cho tôi biết chiều cao của bạn";
+                        response = "Vui lòng cho tôi biết chiều cao của bạn (cm)";
                     } else if (weight == 0) {
-                        response = "Vui lòng cho tôi biết cân nặng của bạn";
+                        response = "Vui lòng cho tôi biết cân nặng của bạn (kg)";
                     }
                     else if (old == 0) {
                         response = "Vui lòng cho tôi biết tuổi của Bạn";
@@ -123,9 +120,9 @@ public class ChatServiceImpl implements ChatService {
                     break;
                 case "bodymenu":
                     if (height == 0) {
-                        response = "Vui lòng cho tôi biết chiều cao của trẻ";
+                        response = "Vui lòng cho tôi biết chiều cao của trẻ (cm)";
                     } else if (weight == 0) {
-                        response = "Vui lòng cho tôi biết cân nặng của trẻ";
+                        response = "Vui lòng cho tôi biết cân nặng của trẻ (kg)";
                     } else if (month == 0) {
                         response = "Vui lòng cho tôi biết tuổi của trẻ (Tháng tuổi)";
                     } else {
@@ -134,9 +131,9 @@ public class ChatServiceImpl implements ChatService {
                     break;
                 case "hientuongmenu":
                     if(hienTuong.equals("unknown")) {
-                        List<HienTuong> list = hientuongService.getHienTuongs();
+                        List<Phenomena> list = hientuongService.getHienTuongs();
                         response = "Hãy chọn biểu hiện của trẻ: \n";
-                        response += list.stream().map(item -> item.getBieuHien()).collect(Collectors.joining(";"));
+                        response += list.stream().map(item -> item.getSymptoms()).collect(Collectors.joining(";"));
                     }else {
                         response = thucDonTheoHienTuong(message);
                     }

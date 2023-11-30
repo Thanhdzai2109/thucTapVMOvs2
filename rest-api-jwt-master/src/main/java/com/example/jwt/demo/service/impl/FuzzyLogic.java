@@ -2,7 +2,7 @@ package com.example.jwt.demo.service.impl;
 
 import com.example.jwt.demo.dto.TinhTrangSucKhoe;
 import com.example.jwt.demo.dto.XacSuat;
-import com.example.jwt.demo.model.ChieuCaoCanNang;
+import com.example.jwt.demo.model.HeightWeight;
 import com.example.jwt.demo.repository.ChieuCaoCanNangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +18,11 @@ public class FuzzyLogic {
     private ChieuCaoCanNangRepository chieuCaoCanNangRepository;
 
     // tìm chiều cao cân nặng theo giới tính và tháng tuổi
-    public ChieuCaoCanNang timChieuCaoCanNang(String gioiTinh, double thang) {
-        List<ChieuCaoCanNang> datas = chieuCaoCanNangRepository.findAll();
-        for (ChieuCaoCanNang chieuCaoCanNang : datas) {
-            if (gioiTinh.equals(chieuCaoCanNang.getGioiTinh()) && thang == chieuCaoCanNang.getTuoi()) {
-                return chieuCaoCanNang;
+    public HeightWeight timChieuCaoCanNang(String gioiTinh, double thang) {
+        List<HeightWeight> datas = chieuCaoCanNangRepository.findAll();
+        for (HeightWeight heightWeight : datas) {
+            if (gioiTinh.equals(heightWeight.getGender()) && thang == heightWeight.getAge()) {
+                return heightWeight;
             }
         }
 
@@ -30,40 +30,40 @@ public class FuzzyLogic {
         return tinhToanChieuCaoCanNang(gioiTinh, thang);
     }
 
-    public ChieuCaoCanNang tinhToanChieuCaoCanNang(String gioiTinh, double thang) {
-        List<ChieuCaoCanNang> datas = chieuCaoCanNangRepository.findAll();
-        datas =datas.stream().sorted(Comparator.comparing(ChieuCaoCanNang::getTuoi)).collect(Collectors.toList());
-        ChieuCaoCanNang smin = null, smax = null;
+    public HeightWeight tinhToanChieuCaoCanNang(String gioiTinh, double thang) {
+        List<HeightWeight> datas = chieuCaoCanNangRepository.findAll();
+        datas =datas.stream().sorted(Comparator.comparing(HeightWeight::getAge)).collect(Collectors.toList());
+        HeightWeight smin = null, smax = null;
         for (int i = 0; i < datas.size() - 2; i++) {
-            ChieuCaoCanNang chieuCaoCanNang = datas.get(i);
-            ChieuCaoCanNang chieuCaoCanNang1 = datas.get(i + 2);
-            if (gioiTinh.equals(chieuCaoCanNang.getGioiTinh()) && thang > chieuCaoCanNang.getTuoi() && thang <= chieuCaoCanNang1.getTuoi()) {
-                smin = chieuCaoCanNang;
-                smax = chieuCaoCanNang1;
+            HeightWeight heightWeight = datas.get(i);
+            HeightWeight heightWeight1 = datas.get(i + 2);
+            if (gioiTinh.equals(heightWeight.getGender()) && thang > heightWeight.getAge() && thang <= heightWeight1.getAge()) {
+                smin = heightWeight;
+                smax = heightWeight1;
                 break;
             }
         }
-        double chieuCaoToiThieu = smin.getChieuCaoToiThieu() + (smax.getChieuCaoToiThieu() - smin.getChieuCaoToiThieu()) * (thang - smin.getTuoi()) / (smax.getTuoi() - smin.getTuoi());
-        double chieuCaoToiDa = smin.getChieuCaoToiDa() + (smax.getChieuCaoToiDa() - smin.getChieuCaoToiDa()) * (thang - smin.getTuoi()) / (smax.getTuoi() - smin.getTuoi());
-        double canNangToiThieu = smin.getCanNangToiThieu() + (smax.getCanNangToiThieu() - smin.getCanNangToiThieu()) * (thang - smin.getTuoi()) / (smax.getTuoi() - smin.getTuoi());
+        double chieuCaoToiThieu = smin.getMinHeight() + (smax.getMinHeight() - smin.getMinHeight()) * (thang - smin.getAge()) / (smax.getAge() - smin.getAge());
+        double chieuCaoToiDa = smin.getMaxHeight() + (smax.getMaxHeight() - smin.getMaxHeight()) * (thang - smin.getAge()) / (smax.getAge() - smin.getAge());
+        double canNangToiThieu = smin.getMinWeight() + (smax.getMinWeight() - smin.getMinWeight()) * (thang - smin.getAge()) / (smax.getAge() - smin.getAge());
 
 
-        double canNangToiDa = smin.getCanNangToiDa() + (smax.getCanNangToiDa() - smin.getCanNangToiDa()) * (thang - smin.getTuoi()) / (smax.getTuoi() - smin.getTuoi());
-        ChieuCaoCanNang chieuCaoCanNang = new ChieuCaoCanNang();
-        chieuCaoCanNang.setGioiTinh(gioiTinh);
-        chieuCaoCanNang.setTuoi(thang);
-        chieuCaoCanNang.setChieuCaoToiThieu(chieuCaoToiThieu);
-        chieuCaoCanNang.setChieuCaoToiDa(chieuCaoToiDa);
-        chieuCaoCanNang.setCanNangToiThieu(canNangToiThieu);
-        chieuCaoCanNang.setCanNangToiDa(canNangToiDa);
-        return chieuCaoCanNang;
+        double canNangToiDa = smin.getMaxWeight() + (smax.getMaxWeight() - smin.getMaxWeight()) * (thang - smin.getAge()) / (smax.getAge() - smin.getAge());
+        HeightWeight heightWeight = new HeightWeight();
+        heightWeight.setGender(gioiTinh);
+        heightWeight.setAge(thang);
+        heightWeight.setMinHeight(chieuCaoToiThieu);
+        heightWeight.setMaxHeight(chieuCaoToiDa);
+        heightWeight.setMinWeight(canNangToiThieu);
+        heightWeight.setMaxWeight(canNangToiDa);
+        return heightWeight;
     }
 
     public void tinhXacSuat(XacSuat cHeight, XacSuat cWeight, String sex, double month, double weight, double height) {
-        ChieuCaoCanNang chieuCaoCanNang = timChieuCaoCanNang(sex, month);
+        HeightWeight heightWeight = timChieuCaoCanNang(sex, month);
 
-        double heightMin = chieuCaoCanNang.getChieuCaoToiThieu();
-        double heightMax = chieuCaoCanNang.getChieuCaoToiDa();
+        double heightMin = heightWeight.getMinHeight();
+        double heightMax = heightWeight.getMaxHeight();
         double heightTb = (heightMax + heightMin) / 2;
 
         if (height < heightMin)
@@ -80,8 +80,8 @@ public class FuzzyLogic {
             cHeight.setCao(1);
         }
 
-        double weightMin = chieuCaoCanNang.getCanNangToiThieu();
-        double weightMax = chieuCaoCanNang.getCanNangToiDa();
+        double weightMin = heightWeight.getMinWeight();
+        double weightMax = heightWeight.getMaxWeight();
         double weightTb = (weightMax + weightMin) / 2;
         if (weight < weightMin) {
             cWeight.setThap(1);
